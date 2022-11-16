@@ -14,8 +14,15 @@
 </template>
 
 <script>
+import { store } from '../store'
 export default {
-    name: 'AppHeader'
+    name: 'AppHeader',
+    data() {
+        return {
+            store
+        }
+
+    }
 }
 </script>
 
