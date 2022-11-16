@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+header {
+    padding: 1rem;
+}
+
 .container {
     display: flex;
     justify-content: space-between;

@@ -1,17 +1,18 @@
 <template>
     <AppHeader />
     <main>
-
-
+        <ListComponent />
     </main>
 </template>
 
 <script>
 import { store } from './store'
 import AppHeader from './components/AppHeader.vue';
+import ListComponent from './components/ListComponent.vue'
 export default {
     components: {
-        AppHeader
+        AppHeader,
+        ListComponent
     },
     data() {
         return {

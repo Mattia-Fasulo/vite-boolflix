@@ -13,3 +13,7 @@ $fa-font-path: "./webfonts";
 body {
     background-color: $bg-main;
 }
+
+.container {
+    max-width: 1400px;
+}
