@@ -1,7 +1,14 @@
 <template>
-    <AppHeader />
+    <AppHeader @search="store.callApi()" />
     <main>
-        <ListComponent />
+        <div class="container">
+            <h2>Movies</h2>
+        </div>
+        <ListComponent :list="store.movieList" />
+        <div class="container">
+            <h2>Series</h2>
+        </div>
+        <ListComponent :list="store.seriesList" />
     </main>
 </template>
 
@@ -26,5 +33,8 @@ export default {
 
 
 <style lang="scss" scoped>
-
+h2 {
+    color: white;
+    font-size: 3rem;
+}
 </style>

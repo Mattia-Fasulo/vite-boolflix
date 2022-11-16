@@ -6,8 +6,10 @@
                 <h1>Boolflix</h1>
             </div>
             <div class="search-bar">
-                <input type="text">
-                <button type="button">Search</button>
+
+                <input type="text" v-model="store.apiQuery">
+                <button type="button" @click.prevent="search">Search</button>
+
             </div>
         </div>
     </header>
@@ -19,11 +21,16 @@ export default {
     name: 'AppHeader',
     data() {
         return {
-            store
+            store,
         }
-
+    },
+    methods: {
+        search() {
+            this.$emit('search')
+        }
     }
 }
+
 </script>
 
 <style lang="scss" scoped>

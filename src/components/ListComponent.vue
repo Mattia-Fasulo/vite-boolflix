@@ -1,7 +1,9 @@
 <template>
     <section>
         <div class="container">
-            <CardComponent />
+            <div class="my-row">
+                <CardComponent :obj="item" v-for="(item, index) in list" :key="item.id" />
+            </div>
         </div>
 
     </section>
@@ -16,6 +18,9 @@ export default {
     components: {
         CardComponent
     },
+    props: {
+        list: ""
+    },
     data() {
         return {
             store
@@ -29,6 +34,15 @@ export default {
 .container {
     padding: 1rem;
     background-color: gray;
-    height: max-content;
+    height: 28vh;
+    overflow: hidden;
+    overflow-x: scroll;
+
+    .my-row {
+        padding: 1rem;
+        display: flex;
+        width: max-content;
+        gap: 15px;
+    }
 }
 </style>
