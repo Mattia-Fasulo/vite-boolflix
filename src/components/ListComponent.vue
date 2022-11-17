@@ -23,10 +23,12 @@ export default {
     },
     data() {
         return {
-            store
+            store,
+
         }
 
-    }
+    },
+
 }
 </script>
 
