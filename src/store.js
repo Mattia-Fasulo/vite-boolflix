@@ -7,9 +7,9 @@ export const store = reactive({
     apiUrlSeries: 'https://api.themoviedb.org/3/search/tv',
     apiKey: '89233bf94f01a12fe4fc19b466c905b3',
     apiQuery: '',
-    lenguage: 'it-IT',
-    movieList: '',
-    seriesList: '',
+    language: 'it-IT',
+    movieList: [],
+    seriesList: [],
     errorMessage: null,
 
     callApi() {
@@ -20,7 +20,7 @@ export const store = reactive({
                 params: {
                     api_key: this.apiKey,
                     query: this.apiQuery,
-                    original_language: this.lenguage
+                    language: this.lenguage
 
                 },
             };
@@ -30,7 +30,7 @@ export const store = reactive({
                 params: {
                     api_key: this.apiKey,
                     query: this.apiQuery,
-                    original_language: this.lenguage
+                    language: this.lenguage
                 },
             };
 

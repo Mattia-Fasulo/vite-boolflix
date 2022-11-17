@@ -6,6 +6,7 @@
             </div>
         </div>
 
+
     </section>
 </template>
 
@@ -16,7 +17,8 @@ import CardComponent from './CardComponent.vue';
 export default {
     name: "ListComponent",
     components: {
-        CardComponent
+        CardComponent,
+
     },
     props: {
         list: ""
@@ -29,14 +31,22 @@ export default {
 
     },
 
+
 }
 </script>
 
 <style lang="scss" scoped>
+.swiper-slide {
+    background-color: white;
+    color: white;
+    height: 200px;
+}
+
 .container {
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: gray;
-    height: 28vh;
+    min-height: 30vh;
+    height: max-content;
     overflow: hidden;
     overflow-x: scroll;
 

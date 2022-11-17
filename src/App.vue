@@ -4,11 +4,13 @@
         <div class="container">
             <h2>Movies</h2>
         </div>
-        <ListComponent :list="store.movieList" />
+        <SliderComponent :list="store.movieList" />
         <div class="container">
             <h2>Series</h2>
         </div>
-        <ListComponent :list="store.seriesList" />
+        <SliderComponent :list="store.seriesList" />
+
+
     </main>
 </template>
 
@@ -16,10 +18,12 @@
 import { store } from './store'
 import AppHeader from './components/AppHeader.vue';
 import ListComponent from './components/ListComponent.vue'
+import SliderComponent from './components/sliderComponent.vue';
 export default {
     components: {
         AppHeader,
-        ListComponent
+        ListComponent,
+        SliderComponent
     },
     data() {
         return {
@@ -35,6 +39,6 @@ export default {
 <style lang="scss" scoped>
 h2 {
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 </style>
