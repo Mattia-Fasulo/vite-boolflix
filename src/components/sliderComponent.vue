@@ -44,8 +44,10 @@
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+
 // Import Swiper styles
 import 'swiper/css/bundle';
+
 
 import { store } from '../store';
 
@@ -73,7 +75,7 @@ export default {
                         spaceBetween: 10
                     },
                     300: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                         spaceBetween: 10
                     },
                     400: {
@@ -110,6 +112,7 @@ export default {
         return {
             onSwiper,
             onSlideChange,
+
         };
     },
 };
@@ -162,7 +165,7 @@ h2 {
     &:hover {
         cursor: grab;
         top: 10;
-        transform: scale(1.7);
+        transform: scale(1.9);
         z-index: 1200;
 
 
@@ -223,9 +226,18 @@ h2 {
         z-index: 10;
     }
 
+
+
+    @media (max-width: 400px) {
+        .swiper-slide:hover {
+            transform: scale(1.2) !important;
+        }
+    }
+
 }
 
 .swiper {
+
     padding: 1rem 1rem;
 }
 </style>
