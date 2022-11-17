@@ -5,12 +5,15 @@ import axios from 'axios';
 export const store = reactive({
     apiUrlMovies: 'https://api.themoviedb.org/3/search/movie',
     apiUrlSeries: 'https://api.themoviedb.org/3/search/tv',
+
     apiKey: '89233bf94f01a12fe4fc19b466c905b3',
     apiQuery: '',
     language: 'it-IT',
     movieList: [],
     seriesList: [],
     errorMessage: null,
+    apiUrlImg: 'https://image.tmdb.org/t/p/',
+    sizeImg: 'w342',
 
     callApi() {
         if (this.apiQuery !== '') {
