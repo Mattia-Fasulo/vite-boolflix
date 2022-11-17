@@ -7,9 +7,8 @@
                 <ul></ul>
             </div>
             <div class="search-bar">
-
-                <input type="text" @keyup.enter="search" v-model.trim="store.apiQuery">
-                <button type="button" @click.prevent="search">Search</button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" @keyup="search" v-model.trim="store.apiQuery">
 
             </div>
         </div>
@@ -45,11 +44,34 @@ header {
     align-items: center;
 
     .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         h1 {
+            padding-top: 10px;
             text-transform: uppercase;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: red;
         }
+    }
+}
+
+.search-bar {
+    color: white;
+
+    input {
+        width: 100px;
+        appearance: none;
+        border: none;
+        outline: none;
+        background: white;
+    }
+
+    i {
+        font-size: 1rem;
+        margin-right: 10px;
     }
 }
 </style>

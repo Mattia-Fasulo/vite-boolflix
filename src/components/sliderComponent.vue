@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <swiper :slides-per-view="6" :breakpoints="swiperOptions.breakpoints" :space-between="10" @swiper="onSwiper"
+        <h2>{{ title }}</h2>
+        <swiper :breakpoints="swiperOptions.breakpoints" :space-between="10" @swiper="onSwiper"
             @slideChange="onSlideChange">
             <swiper-slide v-for="(item, index) in list" :key="item.id">
 
@@ -13,6 +14,7 @@
                     <img class="flags" :src="'/img/' + item.original_language + '.png'"
                         alt="item.original_language +'flag'">
                 </div>
+                <div class="flags" v-else>{{ item.original_language }}</div>
                 <!-- star -->
                 <div class="stars">
                     <span v-for="n in 5" class="fa-star"
@@ -30,9 +32,8 @@
                     <h4 v-if="item.original_title">{{ item.original_title }}</h4>
                     <h4 v-else>{{ item.original_name }}</h4>
 
-                    <div v-else>{{ item.original_language }}</div>
-                    <div class="overview">{{ item.overview }}</div>
 
+                    <div class="overview">{{ item.overview }}</div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -53,7 +54,8 @@ export default {
 
     name: 'sliderComponent',
     props: {
-        list: ''
+        list: '',
+        title: ''
     },
     components: {
         Swiper,
@@ -66,6 +68,10 @@ export default {
             flagsAvaiable: ['de', 'en', 'es', 'fr', 'it', 'ja', 'us'],
             swiperOptions: {
                 breakpoints: {
+                    200: {
+                        slidesPerView: 1,
+                        spaceBetween: 10
+                    },
                     300: {
                         slidesPerView: 1,
                         spaceBetween: 10
@@ -96,10 +102,10 @@ export default {
     },
     setup() {
         const onSwiper = (swiper) => {
-            console.log(swiper);
+            // console.log(swiper);
         };
         const onSlideChange = () => {
-            console.log('slide change');
+            // console.log('slide change');
         };
         return {
             onSwiper,
@@ -110,6 +116,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+    color: white;
+}
+
 .swiper {
     overflow: visible;
 
@@ -120,7 +130,6 @@ export default {
 
     position: relative;
     height: 150px;
-    // width: 300px;
     background-color: white;
     border-radius: 10px;
     transition: all .5s ease-in-out;
@@ -150,19 +159,11 @@ export default {
     }
 
 
-
-    &:hover .flag-container {
-        display: block;
-    }
-
-    &:hover .stars {
-        display: block;
-    }
-
     &:hover {
         cursor: grab;
+        top: 10;
         transform: scale(1.7);
-        z-index: 100;
+        z-index: 1200;
 
 
         .info {
@@ -189,6 +190,16 @@ export default {
     &:active {
         cursor: grabbing;
     }
+
+
+    &:hover .flag-container {
+        display: block;
+    }
+
+    &:hover .stars {
+        display: block;
+    }
+
 
     .flag-container {
         display: none;
