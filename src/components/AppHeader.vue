@@ -4,10 +4,11 @@
 
             <div class="logo">
                 <h1>Boolflix</h1>
+                <ul></ul>
             </div>
             <div class="search-bar">
 
-                <input type="text" v-model.trim="store.apiQuery">
+                <input type="text" @keyup.enter="search" v-model.trim="store.apiQuery">
                 <button type="button" @click.prevent="search">Search</button>
 
             </div>
@@ -46,7 +47,7 @@ header {
     .logo {
         h1 {
             text-transform: uppercase;
-            font-size: 4rem;
+            font-size: 2rem;
             color: red;
         }
     }

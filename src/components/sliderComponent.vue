@@ -1,8 +1,13 @@
 <template>
     <div class="container">
-        <swiper :slides-per-view="6" :space-between="10" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper :slides-per-view="6" :breakpoints="swiperOptions.breakpoints" :space-between="10" @swiper="onSwiper"
+            @slideChange="onSlideChange">
             <swiper-slide v-for="(item, index) in list" :key="item.id">
-                <img class="img-movie" :src="store.apiUrlImg + store.sizeImg + item.poster_path" alt="">
+
+                <!-- image -->
+                <img class="img-movie"
+                    :src="item.poster_path ? store.apiUrlImg + store.sizeImg + item.poster_path : store.placeHolder"
+                    :alt="item.title">
                 <!-- flag -->
                 <div class="flag-container" v-if="(this.flagsAvaiable.includes(item.original_language))">
                     <img class="flags" :src="'/img/' + item.original_language + '.png'"
@@ -26,7 +31,7 @@
                     <h4 v-else>{{ item.original_name }}</h4>
 
                     <div v-else>{{ item.original_language }}</div>
-
+                    <div class="overview">{{ item.overview }}</div>
 
                 </div>
             </swiper-slide>
@@ -40,6 +45,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 
 // Import Swiper styles
 import 'swiper/css/bundle';
+
 import { store } from '../store';
 
 
@@ -58,11 +64,38 @@ export default {
         return {
             store,
             flagsAvaiable: ['de', 'en', 'es', 'fr', 'it', 'ja', 'us'],
+            swiperOptions: {
+                breakpoints: {
+                    300: {
+                        slidesPerView: 1,
+                        spaceBetween: 10
+                    },
+                    400: {
+                        slidesPerView: 3,
+                        spaceBetween: 10
+                    },
+                    600: {
+                        slidesPerView: 4,
+                        spaceBetween: 10
+                    },
+
+                    800: {
+                        slidesPerView: 5,
+                        spaceBetween: 10
+                    },
+
+                    1000: {
+                        slidesPerView: 6,
+                        spaceBetween: 10
+                    }
+
+                }
+            }
+
         }
     },
     setup() {
         const onSwiper = (swiper) => {
-
             console.log(swiper);
         };
         const onSlideChange = () => {
@@ -73,11 +106,6 @@ export default {
             onSlideChange,
         };
     },
-    // computed: {
-    //     star() {
-    //         return Math.ceil(this.item.vote_average / 2)
-    //     }
-    // }
 };
 </script>
 
@@ -108,9 +136,20 @@ export default {
     }
 
     .info {
+        background-color: rgba(0, 0, 0, 0.408);
+        width: 100%;
+        height: 100%;
         display: none;
         padding: 1rem;
+
+        .overview {
+            overflow-y: hidden;
+            height: 35px;
+            font-size: 0.5rem;
+        }
     }
+
+
 
     &:hover .flag-container {
         display: block;
@@ -125,7 +164,9 @@ export default {
         transform: scale(1.7);
         z-index: 100;
 
+
         .info {
+
             color: white;
             display: block;
             position: absolute;
@@ -134,7 +175,7 @@ export default {
             h3 {
                 position: static;
                 font-size: 1rem;
-                margin-bottom: 20px;
+
             }
 
             h4 {
@@ -154,6 +195,7 @@ export default {
         position: absolute;
         top: 10px;
         right: 10px;
+        z-index: 100;
 
         .flags {
             width: 25px;

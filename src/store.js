@@ -14,6 +14,7 @@ export const store = reactive({
     errorMessage: null,
     apiUrlImg: 'https://image.tmdb.org/t/p/',
     sizeImg: 'w342',
+    placeHolder: 'https://via.placeholder.com/300.png',
 
     callApi() {
         if (this.apiQuery !== '') {
