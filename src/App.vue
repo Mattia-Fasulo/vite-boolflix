@@ -2,13 +2,25 @@
     <AppHeader @search="store.callApi()" />
     <main>
 
-        <SliderComponent v-if="store.apiQuery" :title="store.title.movies" :list="store.movieList" />
+        <ListComponent v-if="store.apiQuery && store.select == 'movies'" :title="store.title.movies"
+            :list="store.movieList" />
 
-        <SliderComponent v-if="store.apiQuery" :title="store.title.series" :list="store.seriesList" />
+        <ListComponent v-if="store.apiQuery && store.select == 'series'" :title="store.title.series"
+            :list="store.seriesList" />
 
-        <SliderComponent :title="store.title.popular" :list="store.popularList" />
+        <!-- <SliderComponent v-if="store.apiQuery" :title="store.title.movies" :list="store.movieList" />
 
-        <SliderComponent :title="store.title.top" :list="store.topList" />
+        <SliderComponent v-if="store.apiQuery" :title="store.title.series" :list="store.seriesList" /> -->
+
+        <SliderComponent :title="store.title.moviesPopular" :list="store.popularList" />
+
+        <SliderComponent :title="store.title.seriesPopular" :list="store.popularListSeries" />
+
+        <SliderComponent :title="store.title.moviesTop" :list="store.topList" />
+
+        <SliderComponent :title="store.title.seriesTop" :list="store.topListSeries" />
+
+        <InfoComponent v-if="store.dateInfo" />
 
     </main>
 </template>
@@ -19,11 +31,13 @@ import { store } from './store'
 import AppHeader from './components/AppHeader.vue';
 import ListComponent from './components/ListComponent.vue'
 import SliderComponent from './components/sliderComponent.vue';
+import InfoComponent from './components/infoComponent.vue';
 export default {
     components: {
         AppHeader,
         ListComponent,
-        SliderComponent
+        SliderComponent,
+        InfoComponent
     },
     data() {
         return {
@@ -33,7 +47,6 @@ export default {
     },
     methods: {
         getPopular() {
-            console.log('ciao')
             {
                 const configPopular = {
                     method: 'get',
@@ -48,8 +61,8 @@ export default {
 
                 axios(configPopular)
                     .then((response) => {
-                        console.log(response.data.results);
                         store.popularList = response.data.results;
+
                     })
                     .catch((error) => {
                         console.error(error.message);
@@ -57,10 +70,12 @@ export default {
                     });
 
 
+
+
             }
         },
         getTop() {
-            console.log('ciao')
+
             {
                 const configTop = {
                     method: 'get',
@@ -73,10 +88,67 @@ export default {
                 };
 
 
+
+
                 axios(configTop)
                     .then((response) => {
-                        console.log(response.data.results);
                         store.topList = response.data.results;
+                    })
+                    .catch((error) => {
+                        console.error(error.message);
+                        this.errorMessage = error.message;
+                    });
+
+
+            }
+        },
+        getPopularSeries() {
+            {
+                const configPopularSeries = {
+                    method: 'get',
+                    url: store.apiUrlPopularSeries,
+                    params: {
+                        api_key: store.apiKey,
+                        original_language: store.language
+
+                    }
+                };
+
+
+                axios(configPopularSeries)
+                    .then((response) => {
+                        store.popularListSeries = response.data.results;
+
+                    })
+                    .catch((error) => {
+                        console.error(error.message);
+                        this.errorMessage = error.message;
+                    });
+
+
+
+
+            }
+        },
+        getTopSeries() {
+
+            {
+                const configTopSeries = {
+                    method: 'get',
+                    url: store.apiUrlTopSeries,
+                    params: {
+                        api_key: store.apiKey,
+                        original_language: store.language
+
+                    }
+                };
+
+
+
+
+                axios(configTopSeries)
+                    .then((response) => {
+                        store.topListSeries = response.data.results;
                     })
                     .catch((error) => {
                         console.error(error.message);
@@ -88,8 +160,10 @@ export default {
         }
     },
     mounted() {
-        this.getPopular(),
-            this.getTop()
+        this.getPopular();
+        this.getTop();
+        this.getPopularSeries();
+        this.getTopSeries();
     }
 
 }

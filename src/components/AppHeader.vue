@@ -7,8 +7,15 @@
                 <ul></ul>
             </div>
             <div class="search-bar">
+
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" @keyup="search" v-model.trim="store.apiQuery">
+                <select name="type" v-model="store.select">
+                    <option selected value="">Search in...</option>
+                    <option value="movies">Movies</option>
+                    <option value="series">Series</option>
+                </select>
+
 
             </div>
         </div>
@@ -39,6 +46,8 @@ header {
 }
 
 .container {
+    padding-left: 0;
+    padding-right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,18 +69,31 @@ header {
 
 .search-bar {
     color: white;
+    display: flex;
+    align-items: center;
 
     input {
-        width: 100px;
+        height: 25px;
+        width: 150px;
         appearance: none;
         border: none;
         outline: none;
         background: white;
+        margin-left: 15px;
+        border-radius: 5px;
     }
 
     i {
-        font-size: 1rem;
-        margin-right: 10px;
+        font-size: 1.2rem;
+        margin-left: 10px;
+    }
+
+    select {
+        margin-left: 15px;
+        border: none;
+        width: 150px;
+        height: 25px;
+        border-radius: 5px;
     }
 }
 </style>

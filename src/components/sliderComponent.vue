@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>{{ title }}</h2>
-        <swiper :breakpoints="swiperOptions.breakpoints" :space-between="10" @swiper="onSwiper"
+        <swiper :breakpoints="swiperOptions.breakpoints" :space-between="17" @swiper="onSwiper"
             @slideChange="onSlideChange">
             <swiper-slide v-for="(item, index) in list" :key="item.id">
 
@@ -20,6 +20,9 @@
                     <span v-for="n in 5" class="fa-star"
                         :class="(n <= Math.ceil(item.vote_average / 2)) ? 'fa-solid' : 'fa-regular'">
                     </span>
+                </div>
+                <div class="btn-info">
+                    <span class="fa-solid fa-circle-info"></span>
                 </div>
 
                 <div class="info">
@@ -115,6 +118,13 @@ export default {
 
         };
     },
+    methods: {
+        showInfo() {
+            console.log(this.item)
+            store.dateInfo = this.obj;
+
+        },
+    },
 };
 </script>
 
@@ -125,8 +135,6 @@ h2 {
 
 .swiper {
     overflow: visible;
-
-
 }
 
 .swiper-slide {
@@ -164,7 +172,6 @@ h2 {
 
     &:hover {
         cursor: grab;
-        top: 10;
         transform: scale(1.9);
         z-index: 1200;
 
@@ -186,7 +193,6 @@ h2 {
                 position: static;
                 font-size: 0.7rem;
             }
-
         }
     }
 
@@ -203,16 +209,20 @@ h2 {
         display: block;
     }
 
+    &:hover .btn-info {
+        display: block;
+    }
+
 
     .flag-container {
         display: none;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 0;
+        right: 3px;
         z-index: 100;
 
         .flags {
-            width: 25px;
+            width: 20px;
         }
     }
 
@@ -223,6 +233,16 @@ h2 {
 
         top: 120px;
         left: 1rem;
+        z-index: 10;
+    }
+
+    .btn-info {
+        color: white;
+        cursor: pointer;
+        position: absolute;
+        display: none;
+        top: 120px;
+        right: 1rem;
         z-index: 10;
     }
 
