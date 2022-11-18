@@ -67,23 +67,7 @@ export const store = reactive({
             axios(configMovie)
                 .then((response) => {
                     this.movieList = response.data.results;
-                    store.popularList.forEach((movie) => {
 
-                        const configCast = {
-                            method: 'get',
-                            url: this.apiUrl,
-                            params: {
-                                api_key: this.apiKey,
-                                query: '/movie/' + movie.id + '/credits',
-
-                            },
-                        }
-                        axios(configCast)
-                            .then((actors) => {
-                                // movie.cast = actors.data.cast.slice(0, 4)
-                                console.log(actors.data.cast)
-                            })
-                    })
 
                 })
                 .catch((error) => {

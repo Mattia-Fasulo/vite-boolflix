@@ -53,6 +53,7 @@ export default {
     },
     methods: {
         showInfo() {
+            console.log(this.obj.id)
             store.dateInfo = this.obj;
 
         }

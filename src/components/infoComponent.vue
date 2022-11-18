@@ -28,6 +28,8 @@
             <h2 v-else><span>Original title : </span>{{ store.dateInfo.original_name }}</h2>
             <h2><span>Overview :</span></h2>
             <p>{{ store.dateInfo.overview }}</p>
+            <h3><span>Cast :</span></h3>
+            <span class="actors" v-for="(actor, index) in store.dateInfo.cast" :key="index">{{ actor.name }}, </span>
 
         </div>
     </div>
@@ -35,6 +37,7 @@
 
 <script>
 import { store } from '../store';
+import axios from 'axios';
 
 export default {
     name: 'infoComponent',
@@ -47,7 +50,29 @@ export default {
     methods: {
         closeInfo() {
             store.dateInfo = null;
-        }
+        },
+        getCast() {
+            const configCast = {
+                method: 'get',
+                url: store.apiUrl + '/movie/' + store.dateInfo.id + '/credits',
+                params: {
+                    api_key: store.apiKey,
+
+
+                },
+            }
+            axios(configCast)
+                .then((actors) => {
+                    store.dateInfo.cast = actors.data.cast.slice(0, 4)
+                    console.log(store.dateInfo.cast)
+                })
+        },
+
+
+
+    },
+    mounted() {
+        this.getCast()
     },
 }
 </script>
@@ -93,6 +118,11 @@ export default {
             color: rgb(0, 0, 0);
             font-weight: 700;
         }
+
+        .actors {
+            color: white;
+            font-weight: normal;
+        }
     }
 
     .esc {
@@ -105,7 +135,7 @@ export default {
 
     .img-info {
         width: 100%;
-        height: 60%;
+        height: 40%;
         object-fit: cover;
 
         img {
@@ -135,5 +165,7 @@ export default {
         left: 1rem;
         z-index: 10;
     }
+
+
 }
 </style>
