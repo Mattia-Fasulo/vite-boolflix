@@ -22,10 +22,10 @@
         </div>
         <div class="info">
             <h1 v-if="store.dateInfo.title"><span>Title : </span>{{ store.dateInfo.title }}</h1>
-            <h1 v-else>{{ store.dateInfo.name }}</h1>
+            <h1 v-else><span>Title : </span>{{ store.dateInfo.name }}</h1>
             <h2 v-if="store.dateInfo.original_title"><span>Original title : </span> {{ store.dateInfo.original_title }}
             </h2>
-            <h2 v-else>{{ store.dateInfo.original_name }}</h2>
+            <h2 v-else><span>Original title : </span>{{ store.dateInfo.original_name }}</h2>
             <h2><span>Overview :</span></h2>
             <p>{{ store.dateInfo.overview }}</p>
 
